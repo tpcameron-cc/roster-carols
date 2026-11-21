@@ -68,6 +68,10 @@ uv run python scripts/check_carols.py your-carol-id -v
 uv run python scripts/build_catalog.py
 ```
 
+### Brass choirs and small groups
+
+With fewer instrument types than lines, the four lines are shared out by register and by number of players, top-down: a tuba quartet gets Tuba 1–4 on soprano to bass; 4 euphoniums + 4 tubas gives euphoniums soprano/alto and tubas tenor/bass; 6 euphoniums + 2 tubas gives euphoniums soprano/alto/tenor and tubas bass. In *split sections*, a low section that only suits the bass line (tuba, bari sax, string bass) with two or more players divides into two parts an octave apart where the range allows.
+
 ## Run it locally
 
 ```bash
