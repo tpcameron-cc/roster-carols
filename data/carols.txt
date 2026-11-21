@@ -1,0 +1,235 @@
+// Four-part carol settings for Roster Carols. Format: see roster_carols/carols.py.
+// Melodies are traditional / public domain; the four-part harmonizations are written for
+// this project (released under the project's MIT license).
+// After editing: uv run python scripts/check_carols.py && uv run python scripts/build_catalog.py
+
+== joy-to-the-world
+title: Joy to the World
+credit: Lowell Mason (1839), after Handel
+note: Tune ANTIOCH
+key: D major
+time: 2/4
+S: D5q C#5e. B4s | A4q. G4e | F#4q E4q | D4q., A4e | B4q. B4e | C#5q. C#5e | D5h~ | D5q., D5e | D5e C#5e B4e A4e
+S: A4e. G4s F#4e, D5e | D5e C#5e B4e A4e | A4e. G4s F#4e, F#4e | F#4e F#4e F#4e F#4s G4s | A4q. G4s F#4s,
+S: E4e E4e E4e E4s F#4s | G4q. F#4s E4s, | D4e D5q B4e | A4e. G4s F#4e G4e | F#4q E4q | D4h^
+A: F#4q E4q | F#4q E4q | D4q C#4q | D4h | D4h | E4h | F#4h | F#4h | F#4q G4q
+A: E4q D4q | F#4q G4q | E4q D4q | D4q D4q | D4h
+A: C#4q C#4q | C#4h | D4e F#4q G4e | F#4q D4e D4e | D4q C#4q | D4h
+T: A3q A3q | A3q C#4q | A3q A3q | F#3h | B3h | A3h | A3h | A3h | A3q D4q
+T: C#4q A3q | A3q D4q | C#4q A3q | A3q B3q | A3h
+T: A3q G3q | E3h | F#3e A3q B3e | D4q A3e B3e | A3q G3q | F#3h
+B: D3q A2q | D3q A2q | D3q A2q | D3h | G3h | A2h | D3h | D3h | D3q B2q
+B: A2q D3q | D3q B2q | A2q D3q | D3q B2q | F#3h
+B: A2q A2q | A2h | D3q. G2e | D3q F#3e E3e | A2q A2q | D3h
+
+== hark-the-herald
+title: Hark! The Herald Angels Sing
+credit: Felix Mendelssohn (1840)
+note: Tune MENDELSSOHN
+key: G major
+time: 4/4
+S: D4q G4q G4q. F#4e | G4q B4q B4q A4q, | D5q D5q D5q. C5e | B4q A4q B4h, | D4q G4q G4q. F#4e | G4q B4q B4q A4q, | D5q A4q A4q. G4e | F#4q E4q D4h,
+S: D5q D5q D5q G4q | C5q B4q B4q A4q, | D5q D5q D5q G4q | C5q B4q B4q A4q, | E5q E5q E5q D5q | C5q B4q C5h, | A4q B4e C5e D5q. G4e | G4q A4q B4h,
+S: E5q. E5e E5q D5q | C5q B4q C5h, | A4q B4e C5e D5q. G4e | G4q A4q G4h^
+A: B3q D4q E4q D4q | D4q D4q G4q F#4q | G4q G4q F#4h | G4q F#4q G4h | B3q D4q E4q D4q | D4q D4q E4q E4q | F#4q F#4q F#4h | D4q C#4q A3h
+A: F#4h G4q D4q | F#4q G4q G4q F#4q | F#4h G4q D4q | F#4q G4q G4q F#4q | G4h. G#4q | A4q G#4q A4h | F#4h G4h | E4q F#4q G4h
+A: G4h. G#4q | A4q G#4q A4h | F#4h G4h | E4q F#4q D4h
+T: G3q G3q B3q B3q | B3q G3q B3q D4q | B3q D4q A3h | D4q D4q D4h | G3q G3q B3q B3q | B3q G3q G3q A3q | A3q D4q A3h | A3q G3q F#3h
+T: A3h B3h | A3q D4q D4q D4q | A3h B3h | A3q D4q D4q D4q | E4h. B3q | E4q E4q E4h | D4h B3h | C4q A3q D4h
+T: E4h. B3q | E4q E4q E4h | D4h B3h | C4q A3q B3h
+B: G2q B2q E3q B2q | G2q G2q G2q D3q | G2q B2q D3h | G2q D3q G2h | G2q B2q E3q B2q | G2q G2q E3q C#3q | D3q D3q D3h | D3q A2q D3h
+B: D3h G2h | D3q G2q G2q D3q | D3h G2h | D3q G2q G2q D3q | C3h. E3q | A2q E3q A2h | D3h G2h | E3q D3q G2h
+B: C3h. E3q | A2q E3q A2h | D3h G2h | E3q D3q G2h
+
+== silent-night
+title: Silent Night
+credit: Franz Xaver Gruber (1818)
+note: Tune STILLE NACHT
+key: C major
+time: 3/4
+S: G4q. A4e G4q | E4h., | G4q. A4e G4q | E4h., | D5h D5q | B4h., | C5h C5q | G4h., | A4h A4q | C5q. B4e A4q | G4q. A4e G4q | E4h.,
+S: A4h A4q | C5q. B4e A4q | G4q. A4e G4q | E4h., | D5h D5q | F5q. D5e B4q | C5h. | E5h., | C5q. G4e E4q | G4q. F4e D4q | C4h.^
+A: E4h. | C4h. | E4h. | C4h. | G4h. | F4h. | E4h. | E4h. | F4h. | F4h. | E4h. | C4h.
+A: E4h. | F4h. | E4h. | C4h. | G4h. | G4h. | G4h. | G4h. | C4h. | B3h. | C4h.
+T: C4h. | G3h. | C4h. | G3h. | B3h. | D4h. | C4h. | C4h. | C4h. | C4h. | C4h. | G3h.
+T: C4h. | C4h. | C4h. | G3h. | B3h. | B3h. | E4h. | C4h. | G3h. | F3h. | E3h.
+B: C3h. | C3h. | C3h. | C3h. | G2h. | G2h. | C3h. | C3h. | F3h. | F3h. | C3h. | C3h.
+B: A2h. | F3h. | C3h. | C3h. | G2h. | G2h. | C3h. | C3h. | E3h. | G2h. | C3h.
+
+== o-come-all-ye-faithful
+title: O Come, All Ye Faithful
+credit: John Francis Wade (c. 1743)
+note: Tune ADESTE FIDELES
+key: G major
+time: 4/4
+S: G4q | G4h D4q G4q | A4h D4h, | B4q A4q B4q C5q | B4h A4q G4q | G4h F#4q E4q | F#4q G4q A4q B4q | F#4h E4q. D4e | D4h., rq
+S: D5h C5q B4q | C5h B4h, | A4q B4q G4q A4q | F#4q. E4e D4q, G4q | G4q F#4q G4q A4q | G4h D4q, B4q | B4q A4q B4q C5q | B4h A4q B4q
+S: C5q B4q A4q G4q | F#4h G4q C5q | B4h A4q. G4e | G4h.^
+A: D4q | D4h B3q D4q | F#4h D4h | G4q F#4q G4q G4q | G4h F#4q E4q | E4h D4q C#4q | D4q D4q F#4q G4q | D4h C#4h | A3h. rq
+A: G4h G4q G4q | G4h G4h | F#4q G4q E4q F#4q | D4h A3q B3q | D4q D4q D4q F#4q | D4h B3q D4q | G4q F#4q G4q G4q | G4h F#4q G4q
+A: F#4q G4q E4q E4q | D4h D4q E4q | G4h F#4h | D4h.
+T: B3q | B3h G3q B3q | D4h A3h | D4q D4q D4q E4q | D4h D4q B3q | C4h A3q A3q | A3q B3q D4q D4q | A3h G3h | F#3h. rq
+T: B3h E4q D4q | E4h D4h | D4q D4q C4q A3q | A3h F#3q G3q | B3q A3q B3q A3q | B3h G3q G3q | D4q D4q D4q E4q | D4h D4q D4q
+T: A3q D4q C#4q C#4q | A3h B3q C4q | G3h C4h | B3h.
+B: G2q | G2h B2q G2q | D3h D3h | G2q D3q G2q C3q | G2h D3q E3q | C3h D3q A2q | D3q G2q F#3q G2q | A2h A2h | D3h. rq
+B: G2h C3q G2q | C3h G2h | D3q G2q E3q D3q | A2h D3q G2q | G2q D3q G2q D3q | G2h G2q G2q | G2q D3q G2q C3q | G2h D3q G2q
+B: D3q G2q A2q A2q | D3h B2q A2q | D3h D3h | G2h.
+
+== away-in-a-manger
+title: Away in a Manger
+credit: William J. Kirkpatrick (1895)
+note: Tune CRADLE SONG
+key: G major
+time: 3/4
+S: D4q | G4q G4q A4e B4e | G4q G4q B4e C5e | D5q D5q E5q | C5h, A4e B4e | C5q C5q D5q | B4q B4q G4e B4e | A4q E4q G4q | F#4h, D4q
+S: G4q G4q A4e B4e | G4q G4q B4e C5e | D5q D5q E5q | C5h, A4e B4e | C5q C5q D5q | B4q B4q G4e B4e | A4q E4q F#4q | G4h^
+A: B3q | D4q D4q F#4q | D4q D4q G4q | A4q A4q G4q | E4h. | F#4h. | G4h. | E4q C#4q C#4q | D4h C4q
+A: B3q D4q F#4q | D4q D4q G4q | A4q A4q G4q | E4h. | F#4h. | G4h. | E4q C4q C4q | B3h
+T: G3q | B3q B3q C4q | B3q B3q D4q | D4q D4q B3q | A3h. | A3h. | D4h. | C#4q A3q A3q | A3h F#3q
+T: G3q B3q C4q | B3q B3q D4q | D4q D4q B3q | A3h. | A3h. | D4h. | C4q A3q A3q | G3h
+B: G2q | G2q B2q D3q | G2q G2q G3q | F#3q F#3q E3q | A2h. | D3h. | G2h. | A2q A2q A2q | D3h D3q
+B: G2q G2q D3q | G2q G2q G3q | F#3q F#3q E3q | A2h. | D3h. | G2h. | A2q A2q D3q | G2h
+
+== the-first-noel
+title: The First Noel
+credit: Traditional English
+note: Traditional English carol
+key: D major
+time: 3/4
+S: F#4e E4e | D4q. E4e F#4e G4e | A4h B4e C#5e | D5q C#5q B4q | A4h, B4e C#5e | D5q C#5q B4q | A4q B4q C#5q | D5q A4q G4q | F#4h, F#4e E4e
+S: D4q. E4e F#4e G4e | A4h B4e C#5e | D5q C#5q B4q | A4h, B4e C#5e | D5q C#5q B4q | A4q B4q C#5q | D5q A4q G4q | F#4h, F#4e E4e
+S: D4q. E4e F#4e G4e | A4h D5e C#5e | B4h B4q | A4h., | D5q C#5q B4q | A4q B4q C#5q | D5q A4q G4q | F#4h^
+A: D4q | A3h D4q | E4h. | G4q E4q G4q | F#4h D4q | G4q E4q G4q | E4q E4q E4q | F#4q F#4q E4q | D4h.
+A: A3h D4q | E4h. | G4q E4q G4q | F#4h D4q | G4q E4q G4q | E4q E4q E4q | F#4q F#4q E4q | D4h.
+A: A3h D4q | C#4h D4q | G4h. | F#4h. | G4q E4q G4q | E4q E4q E4q | F#4q F#4q E4q | D4h
+T: A3q | F#3h A3q | C#4h. | B3q A3q D4q | A3h. | B3q A3q D4q | C#4q B3q G3q | F#3q A3q C#4q | A3h.
+T: F#3h A3q | C#4h. | B3q A3q D4q | A3h. | B3q A3q D4q | C#4q B3q G3q | F#3q A3q C#4q | A3h.
+T: F#3h A3q | A3h B3q | D4h. | D4h. | B3q A3q D4q | C#4q B3q G3q | F#3q A3q C#4q | A3h
+B: D3q | D3h D3q | A2h. | G2q A2q G2q | D3h. | G2q A2q G2q | A2q G#2q A2q | D3q D3q A2q | D3h.
+B: D3h D3q | A2h. | G2q A2q G2q | D3h. | G2q A2q G2q | A2q G#2q A2q | D3q D3q A2q | D3h.
+B: D3h D3q | F#3h B2q | G2h. | D3h. | G2q A2q G2q | A2q G#2q A2q | D3q D3q A2q | D3h
+
+== o-come-o-come-emmanuel
+title: O Come, O Come, Emmanuel
+credit: 15th-century French
+note: Tune VENI EMMANUEL
+key: E minor
+time: 4/4
+S: E4q | G4q B4q B4q B4q | A4q C5q B4q A4q | G4h., A4q | B4q G4q E4q G4q | A4q F#4q E4q D4q | E4h., A4q | A4q E4q E4q F#4q | G4h F#4q E4q | D4h., G4q
+S: A4q B4q B4q B4q | A4q C5q B4q A4q | G4h., D5q | D5h., B4q | B4h., B4q | A4q C5q B4q A4q | G4h., A4q | B4q G4q E4q G4q | A4q F#4q E4q D4q | E4h.^
+A: B3q | E4q E4q G4q G4q | E4q E4q G4q F#4q | D4h. D4q | G4q E4q B3q E4q | F#4q D4q C4q A3q | B3h. E4q | E4q C4q C4q C4q | E4h D4q C4q | A3h. D4q
+A: E4q E4q G4q G4q | E4q E4q G4q F#4q | D4h. G4q | F#4h. F#4q | A4h. G4q | E4q E4q G4q F#4q | D4h. D4q | G4q E4q B3q E4q | F#4q D4q C4q A3q | B3h.
+T: G3q | B3q G3q D4q E4q | C4q A3q D4q D4q | B3h. A3q | E4q B3q G3q B3q | D4q A3q A3q F#3q | G3h. C4q | C4q A3q G3q F#3q | C4h A3q A3q | F#3h. B3q
+T: C4q G3q D4q E4q | C4q A3q D4q D4q | B3h. B3q | A3h. A3q | D#4h. E4q | C4q A3q D4q D4q | B3h. A3q | E4q B3q G3q B3q | D4q A3q A3q F#3q | G3h.
+B: E3q | E3q E3q G2q E3q | A2q A2q G2q D3q | G2h. F#3q | E3q E3q E3q E3q | D3q D3q A2q D3q | E2h. C3q | A2q A2q C3q D3q | C3h D3q A2q | D3h. B2q
+B: A2q E3q G2q E3q | A2q A2q G2q D3q | G2h. G2q | D3h. D#3q | B2h. E3q | A2q A2q G2q D3q | G2h. F#3q | E3q E3q E3q E3q | D3q D3q A2q D3q | E2h.
+
+== good-king-wenceslas
+title: Good King Wenceslas
+credit: Piae Cantiones (1582)
+note: Tune TEMPUS ADEST FLORIDUM
+key: G major
+time: 4/4
+S: G4q G4q G4q A4q | G4q G4q D4h, | E4q D4q E4q F#4q | G4h G4h, | G4q G4q G4q A4q | G4q G4q D4h, | E4q D4q E4q F#4q | G4h G4h,
+S: D5q C5q B4q A4q | B4q A4q G4h, | E4q D4q E4q F#4q | G4h G4h, | D4q D4q E4q F#4q | G4q G4q A4h, | D5q C5q B4q A4q | G4h C5h | G4w^
+A: D4q D4q E4q F#4q | D4q E4q A3h | C4q B3q C4q C4q | B3h D4h | D4q D4q E4q F#4q | D4q E4q A3h | C4q B3q C4q C4q | B3h D4h
+A: G4q G4q G4q F#4q | G4q E4q D4h | C4q B3q C4q C4q | B3h D4h | A3q A3q C#4q D4q | D4q D4q F#4h | G4q G4q G4q F#4q | E4h G4h | D4w
+T: B3q G3q C4q A3q | B3q B3q F#3h | G3q G3q G3q A3q | G3h B3h | B3q G3q C4q A3q | B3q B3q F#3h | G3q G3q G3q A3q | G3h B3h
+T: B3q E4q D4q D4q | B3q C4q B3h | G3q G3q G3q A3q | G3h B3h | F#3q F#3q A3q A3q | B3q B3q C4h | B3q E4q D4q D4q | B3h C4h | B3w
+B: G2q B2q E3q D3q | G2q E3q D3h | C3q G2q E3q D3q | G2h G2h | G2q B2q E3q D3q | G2q E3q D3h | C3q G2q E3q D3q | G2h G2h
+B: G2q C3q G2q D3q | G2q A2q B2h | C3q G2q E3q D3q | G2h G2h | D3q D3q A2q D3q | G2q B2q D3h | G2q C3q G2q D3q | E3h E3h | G2w
+
+== deck-the-halls
+title: Deck the Halls
+credit: Traditional Welsh
+note: Tune NOS GALAN
+key: D major
+time: 4/4
+S: A4q. G4e F#4q E4q | D4q E4q F#4q D4q | E4e F#4e G4e E4e F#4q. E4e | D4q C#4q D4h, | A4q. G4e F#4q E4q | D4q E4q F#4q D4q | E4e F#4e G4e E4e F#4q. E4e | D4q C#4q D4h,
+S: E4q. F#4e G4q E4q | F#4q. G4e A4q E4q | F#4e G4e A4q B4e C#5e D5q | C#5q B4q A4h, | A4q. G4e F#4q E4q | D4q E4q F#4q D4q | B4e B4e B4e B4e A4q. G4e | F#4q E4q D4h^
+A: F#4h D4q C#4q | A3q C#4q D4q A3q | C#4h D4h | A3q A3q A3h | F#4h D4q C#4q | A3q C#4q D4q A3q | C#4h D4h | A3q A3q A3h
+A: C#4h C#4h | D4h F#4q C#4q | D4q F#4q F#4q F#4q | A4q G#4q E4h | F#4h D4q C#4q | A3q C#4q D4q A3q | D4h D4h | D4q C#4q A3h
+T: D4h A3q A3q | F#3q A3q A3q F#3q | A3h A3h | F#3q E3q F#3h | D4h A3q A3q | F#3q A3q A3q F#3q | A3h A3h | F#3q E3q F#3h
+T: A3h A3h | A3h A3q A3q | A3q D4q D4q D4q | E4q D4q C#4h | D4h A3q A3q | F#3q A3q A3q F#3q | G3h F#3h | A3q G3q F#3h
+B: D3h D3q A2q | D3q A2q D3q D3q | A2h D3h | D3q A2q D3h | D3h D3q A2q | D3q A2q D3q D3q | A2h D3h | D3q A2q D3h
+B: A2h G2h | F#2h F#3q A2q | D3q D3q B2q B2q | A2q E3q A2h | D3h D3q A2q | D3q A2q D3q D3q | G2h D3h | A2q A2q D3h
+
+== we-wish-you-a-merry-christmas
+title: We Wish You a Merry Christmas
+credit: Traditional English
+note: Traditional English carol
+key: G major
+time: 3/4
+S: D4q | G4q G4e A4e G4e F#4e | E4q C4q E4q | A4q A4e B4e A4e G4e | F#4q D4q D4q | B4q B4e C5e B4e A4e | G4q E4q D4e D4e | E4q A4q F#4q | G4h, D4q
+S: G4q G4q G4q | F#4h F#4q | G4q F#4q E4q | D4h, A4q | B4q A4e A4e G4q | D5q D4q D4e D4e | E4q A4q F#4q | G4h.^
+A: B3q | D4h. | C4h. | E4h. | D4q A3q A3q | D#4h. | E4q B3q B3q | C4q E4q D4q | D4h B3q
+A: D4q D4q D4q | D4h C4q | B3q D4q C#4q | A3h C4q | B3q C4q D4q | F#4q A3q A3q | C4q E4q D4q | D4h.
+T: G3q | B3h. | G3h. | C#4h. | A3q F#3q F#3q | A3h. | B3q G3q G3q | G3q C4q A3q | B3h G3q
+T: B3q G3q B3q | A3h A3q | G3q A3q A3q | F#3h F#3q | G3q F#3q G3q | A3q F#3q F#3q | G3q C4q A3q | B3h.
+B: G2q | G2h B2q | C3h. | A2h. | D3q D3q D3q | B2h. | E3q E3q E3q | C3q A2q D3q | G2h G2q
+B: G2q B2q G2q | D3h D3q | G2q D3q A2q | D3h D3q | G2q D3q B2q | D3q D3q D3q | C3q A2q D3q | G2h.
+
+== jingle-bells
+title: Jingle Bells
+credit: James Lord Pierpont (1857)
+note: Verse and chorus
+key: G major
+time: 4/4
+S: D4q B4q A4q G4q | D4h. D4e D4e | D4q B4q A4q G4q | E4w, | E4q C5q B4q A4q | F#4h., re F#4e | D5q D5q C5q A4q | B4h., re D4e
+S: D4q B4q A4q G4q | D4h. re D4e | D4q B4q A4q G4q | E4h., re E4e | E4q C5q B4q A4q | D5q D5q D5q D5q | E5q D5q C5q A4q | G4h, D5h
+S: B4q B4q B4h | B4q B4q B4h | B4q D5q G4q. A4e | B4w, | C5q C5q C5q. C5e | C5q B4q B4q B4e B4e | B4q A4q A4q B4q | A4h, D5h
+S: B4q B4q B4h | B4q B4q B4h | B4q D5q G4q. A4e | B4w, | C5q C5q C5q. C5e | C5q B4q B4q B4e B4e | D5q D5q C5q A4q | G4h^
+A: B3q D4q D4q D4q | B3w | B3q D4q D4q D4q | C4w | C4q E4q E4q E4q | C4w | F#4w | G4h B3h
+A: B3q D4q D4q D4q | B3w | B3q D4q D4q D4q | C4w | C4q E4q E4q E4q | G4w | G4q G4q F#4q F#4q | D4h F#4h
+A: G4w | G4w | G4q G4q D4h | G4w | G4w | G4w | G4q G4q E4q E4q | F#4w
+A: G4w | G4w | G4q G4q D4h | G4w | G4w | G4w | F#4w | D4h
+T: G3q G3q A3q B3q | G3w | G3q G3q A3q B3q | G3w | A3q A3q G3q C4q | F#3w | A3h C4h | B3h G3h
+T: G3q G3q A3q B3q | G3w | G3q G3q A3q B3q | G3w | A3q A3q G3q C4q | B3h D4h | C4q D4q A3q C4q | B3h C4h
+T: B3w | D4w | D4q B3q B3h | D4w | E4w | E4q D4q D4h | E4q C#4q C#4q B3q | C4h A3h
+T: B3w | D4w | D4q B3q B3h | D4w | E4w | E4q D4q D4h | A3q C4q A3q C4q | B3h
+B: G2q G2q F#2q G2q | G2w | G2q G2q F#2q G2q | C3w | A2q A2q E3q A2q | D3w | D3w | G2w
+B: G2q G2q F#2q G2q | G2w | G2q G2q F#2q G2q | C3w | A2q A2q E3q A2q | G2h B2h | C3q B2q D3q D3q | G2h A2h
+B: G2w | B2w | G2q G2q G2h | G2w | C3w | C3q G2q G2h | E3q A2q A2q G2q | D3w
+B: G2w | B2w | G2q G2q G2h | G2w | C3w | C3q G2q G2h | D3w | G2h
+
+== god-rest-ye-merry-gentlemen
+title: God Rest Ye Merry, Gentlemen
+credit: Traditional English
+note: Traditional English carol
+key: E minor
+time: 4/4
+S: E4q | E4q B4q B4q A4q | G4q F#4q E4q D4q | E4q F#4q G4q A4q | B4h., E4q | E4q B4q B4q A4q | G4q F#4q E4q D4q | E4q F#4q G4q A4q | B4h, rq B4q
+S: C5q A4q B4q C5q | D5q E5q B4q A4q, | G4q E4q F#4q G4q | A4h G4q A4q | B4h C5q B4q | B4q A4q G4q F#4q, | E4h G4e F#4e E4q, | A4h G4q A4q
+S: B4q C5q D5q E5q | B4q A4q G4q F#4q | E4h.^
+A: B3q | B3q E4q G4q E4q | E4q D4q C4q A3q | C4q C4q E4q E4q | D#4h. B3q | B3q E4q G4q E4q | E4q D4q C4q A3q | C4q C4q E4q E4q | D#4h rq E4q
+A: E4q E4q G4q G4q | G4q G4q G4q F#4q | E4q B3q D4q D4q | F#4h D4q F#4q | G4h G4q G4q | D#4q D#4q E4q D#4q | B3h B3q C4q | D4h D4q D4q
+A: D4q E4q G4q G4q | D#4q D#4q E4q D#4q | B3h.
+T: G3q | G3q G3q E4q C4q | B3q B3q G3q F#3q | E3q A3q C4q C4q | A3h. G3q | G3q G3q E4q C4q | B3q B3q G3q F#3q | E3q A3q C4q C4q | A3h rq B3q
+T: A3q C4q D4q E4q | B3q C4q B3q D4q | B3q G3q A3q B3q | D4h B3q A3q | D4h E4q D4q | A3q F#3q G3q A3q | G3h G3q A3q | A3h B3q A3q
+T: G3q G3q B3q C4q | A3q F#3q G3q A3q | G3h.
+B: E3q | E3q E3q E3q A2q | E3q B2q C3q D3q | C3q D3q C3q C3q | B2h. E3q | E3q E3q E3q A2q | E3q B2q C3q D3q | C3q D3q C3q C3q | B2h rq E3q
+B: A2q A2q G2q C3q | G2q C3q G2q D3q | E3q E3q D3q G2q | D3h G2q D3q | G2h C3q G2q | B2q B2q E3q B2q | E3h E3q A2q | F#3h G2q F#3q
+B: G2q C3q G2q C3q | B2q B2q E3q B2q | E3h.
+
+== what-child-is-this
+title: What Child Is This?
+credit: Traditional English
+note: Tune GREENSLEEVES
+key: E minor
+time: 3/4
+S: E4q | G4h A4q | B4q. C5e B4q | A4h F#4q | D4q. E4e F#4q | G4h E4q | E4q. D#4e E4q | F#4h D#4q | B3h, E4q
+S: G4h A4q | B4q. C5e B4q | A4h F#4q | D4q. E4e F#4q | G4q. F#4e E4q | D#4q. C#4e D#4q | E4h.~ | E4h, rq
+S: D5h. | D5q. C#5e B4q | A4h F#4q | D4q. E4e F#4q | G4h E4q | E4q. D#4e E4q | F#4h D#4q | B3h.,
+S: D5h. | D5q. C#5e B4q | A4h F#4q | D4q. E4e F#4q | G4h E4q | D#4q. C#4e D#4q | E4h.^
+A: B3q | E4h E4q | G4h. | F#4h D4q | A3h D4q | D4h B3q | C4h B3q | D#4h B3q | F#3h B3q
+A: E4h E4q | G4h. | F#4h D4q | A3h D4q | D4h C4q | B3h. | B3h. | B3h rq
+A: D4h. | G4h G4q | F#4h D4q | A3h D4q | D4h B3q | C4h B3q | D#4h B3q | F#3h.
+A: D4h. | G4h G4q | F#4h D4q | A3h D4q | D4h C4q | B3h. | B3h.
+T: G3q | B3h C4q | B3h. | D4h A3q | F#3h A3q | B3h G3q | A3h G3q | A3h F#3q | D#3h G3q
+T: B3h C4q | B3h. | D4h A3q | F#3h A3q | B3h E3q | A3h. | G3h. | G3h rq
+T: B3h. | D4h E4q | A3h A3q | F#3h A3q | B3h G3q | A3h G3q | A3h F#3q | D#3h.
+T: B3h. | D4h E4q | A3h A3q | F#3h A3q | B3h E3q | A3h. | G3h.
+B: E3q | E3h A2q | G2h. | D3h. | D3h D3q | G2h E3q | A2h E3q | B2h B2q | B2h G2q
+B: E3h A2q | G2h. | D3h. | D3h D3q | G2h A2q | B2h. | E3h. | E3h rq
+B: G2h. | B2h G2q | D3h D3q | D3h D3q | G2h E3q | A2h E3q | B2h B2q | B2h.
+B: G2h. | B2h G2q | D3h D3q | D3h D3q | G2h A2q | B2h. | E2h.

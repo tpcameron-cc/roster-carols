@@ -1,0 +1,295 @@
+[
+ {
+  "id": "joy-to-the-world",
+  "source": "carol",
+  "title": "Joy to the World",
+  "subtitle": "Tune ANTIOCH",
+  "credit": "Lowell Mason (1839), after Handel",
+  "key": "D major",
+  "measures": 20
+ },
+ {
+  "id": "hark-the-herald",
+  "source": "carol",
+  "title": "Hark! The Herald Angels Sing",
+  "subtitle": "Tune MENDELSSOHN",
+  "credit": "Felix Mendelssohn (1840)",
+  "key": "G major",
+  "measures": 20
+ },
+ {
+  "id": "silent-night",
+  "source": "carol",
+  "title": "Silent Night",
+  "subtitle": "Tune STILLE NACHT",
+  "credit": "Franz Xaver Gruber (1818)",
+  "key": "C major",
+  "measures": 23
+ },
+ {
+  "id": "o-come-all-ye-faithful",
+  "source": "carol",
+  "title": "O Come, All Ye Faithful",
+  "subtitle": "Tune ADESTE FIDELES",
+  "credit": "John Francis Wade (c. 1743)",
+  "key": "G major",
+  "measures": 21
+ },
+ {
+  "id": "away-in-a-manger",
+  "source": "carol",
+  "title": "Away in a Manger",
+  "subtitle": "Tune CRADLE SONG",
+  "credit": "William J. Kirkpatrick (1895)",
+  "key": "G major",
+  "measures": 17
+ },
+ {
+  "id": "the-first-noel",
+  "source": "carol",
+  "title": "The First Noel",
+  "subtitle": "Traditional English carol",
+  "credit": "Traditional English",
+  "key": "D major",
+  "measures": 25
+ },
+ {
+  "id": "o-come-o-come-emmanuel",
+  "source": "carol",
+  "title": "O Come, O Come, Emmanuel",
+  "subtitle": "Tune VENI EMMANUEL",
+  "credit": "15th-century French",
+  "key": "E minor",
+  "measures": 20
+ },
+ {
+  "id": "good-king-wenceslas",
+  "source": "carol",
+  "title": "Good King Wenceslas",
+  "subtitle": "Tune TEMPUS ADEST FLORIDUM",
+  "credit": "Piae Cantiones (1582)",
+  "key": "G major",
+  "measures": 17
+ },
+ {
+  "id": "deck-the-halls",
+  "source": "carol",
+  "title": "Deck the Halls",
+  "subtitle": "Tune NOS GALAN",
+  "credit": "Traditional Welsh",
+  "key": "D major",
+  "measures": 16
+ },
+ {
+  "id": "we-wish-you-a-merry-christmas",
+  "source": "carol",
+  "title": "We Wish You a Merry Christmas",
+  "subtitle": "Traditional English carol",
+  "credit": "Traditional English",
+  "key": "G major",
+  "measures": 17
+ },
+ {
+  "id": "jingle-bells",
+  "source": "carol",
+  "title": "Jingle Bells",
+  "subtitle": "Verse and chorus",
+  "credit": "James Lord Pierpont (1857)",
+  "key": "G major",
+  "measures": 32
+ },
+ {
+  "id": "god-rest-ye-merry-gentlemen",
+  "source": "carol",
+  "title": "God Rest Ye Merry, Gentlemen",
+  "subtitle": "Traditional English carol",
+  "credit": "Traditional English",
+  "key": "E minor",
+  "measures": 20
+ },
+ {
+  "id": "what-child-is-this",
+  "source": "carol",
+  "title": "What Child Is This?",
+  "subtitle": "Tune GREENSLEEVES",
+  "credit": "Traditional English",
+  "key": "E minor",
+  "measures": 32
+ },
+ {
+  "id": "bwv368",
+  "source": "bach",
+  "file": "bwv368",
+  "bwv": "368",
+  "title": "In dulci jubilo",
+  "subtitle": "In sweet rejoicing (Good Christian friends, rejoice)",
+  "credit": "J. S. Bach · BWV 368",
+  "key": "F major",
+  "measures": 33
+ },
+ {
+  "id": "bwv248.12-2",
+  "source": "bach",
+  "file": "bwv248.12-2",
+  "bwv": "248.12-2",
+  "title": "Brich an, o schönes Morgenlicht",
+  "subtitle": "Break forth, O beauteous heavenly light · Christmas Oratorio, Part II",
+  "credit": "J. S. Bach · BWV 248.12-2",
+  "key": "G major",
+  "measures": 15
+ },
+ {
+  "id": "bwv248.5",
+  "source": "bach",
+  "file": "bwv248.5",
+  "bwv": "248.5",
+  "title": "Wie soll ich dich empfangen",
+  "subtitle": "How shall I fitly meet thee? · Christmas Oratorio, Part I",
+  "credit": "J. S. Bach · BWV 248.5",
+  "key": "A minor",
+  "measures": 15
+ },
+ {
+  "id": "bwv248.28",
+  "source": "bach",
+  "file": "bwv248.28",
+  "bwv": "248.28",
+  "title": "Dies hat er alles uns getan",
+  "subtitle": "All this he has done for us · Christmas Oratorio, Part III",
+  "credit": "J. S. Bach · BWV 248.28",
+  "key": "A major",
+  "measures": 11
+ },
+ {
+  "id": "bwv248.33-3",
+  "source": "bach",
+  "file": "bwv248.33-3",
+  "bwv": "248.33-3",
+  "title": "Ich will dich mit Fleiß bewahren",
+  "subtitle": "I will keep you close · Christmas Oratorio, Part III",
+  "credit": "J. S. Bach · BWV 248.33-3",
+  "key": "G major",
+  "measures": 14
+ },
+ {
+  "id": "bwv248.46-5",
+  "source": "bach",
+  "file": "bwv248.46-5",
+  "bwv": "248.46-5",
+  "title": "Dein Glanz all Finsternis verzehrt",
+  "subtitle": "Your light consumes all darkness · Christmas Oratorio, Part V",
+  "credit": "J. S. Bach · BWV 248.46-5",
+  "key": "A major",
+  "measures": 13
+ },
+ {
+  "id": "bwv248.53-5",
+  "source": "bach",
+  "file": "bwv248.53-5",
+  "bwv": "248.53-5",
+  "title": "Zwar ist solche Herzensstube",
+  "subtitle": "Though my heart is but a poor room · Christmas Oratorio, Part V",
+  "credit": "J. S. Bach · BWV 248.53-5",
+  "key": "A major",
+  "measures": 8
+ },
+ {
+  "id": "bwv65.2",
+  "source": "bach",
+  "file": "bwv65.2",
+  "bwv": "65.2",
+  "title": "Puer natus in Bethlehem",
+  "subtitle": "A child is born in Bethlehem",
+  "credit": "J. S. Bach · BWV 65.2",
+  "key": "A minor",
+  "measures": 17
+ },
+ {
+  "id": "bwv62.6",
+  "source": "bach",
+  "file": "bwv62.6",
+  "bwv": "62.6",
+  "title": "Nun komm, der Heiden Heiland",
+  "subtitle": "Savior of the nations, come (Advent)",
+  "credit": "J. S. Bach · BWV 62.6",
+  "key": "G minor",
+  "measures": 10
+ },
+ {
+  "id": "bwv64.2",
+  "source": "bach",
+  "file": "bwv64.2",
+  "bwv": "64.2",
+  "title": "Gelobet seist du, Jesu Christ",
+  "subtitle": "All praise to you, Jesus Christ",
+  "credit": "J. S. Bach · BWV 64.2",
+  "key": "G major",
+  "measures": 12
+ },
+ {
+  "id": "bwv151.5",
+  "source": "bach",
+  "file": "bwv151.5",
+  "bwv": "151.5",
+  "title": "Lobt Gott, ihr Christen, allzugleich",
+  "subtitle": "Praise God, you Christians, all together",
+  "credit": "J. S. Bach · BWV 151.5",
+  "key": "G major",
+  "measures": 12
+ },
+ {
+  "id": "bwv414",
+  "source": "bach",
+  "file": "bwv414",
+  "bwv": "414",
+  "title": "Uns ist ein Kindlein heut' gebor'n",
+  "subtitle": "To us a child is born today",
+  "credit": "J. S. Bach · BWV 414",
+  "key": "G major",
+  "measures": 12
+ },
+ {
+  "id": "bwv40.3",
+  "source": "bach",
+  "file": "bwv40.3",
+  "bwv": "40.3",
+  "title": "Wir Christenleut'",
+  "subtitle": "We Christian folk",
+  "credit": "J. S. Bach · BWV 40.3",
+  "key": "G minor",
+  "measures": 12
+ },
+ {
+  "id": "bwv121.6",
+  "source": "bach",
+  "file": "bwv121.6",
+  "bwv": "121.6",
+  "title": "Christum wir sollen loben schon",
+  "subtitle": "Now praise we Christ, the holy one",
+  "credit": "J. S. Bach · BWV 121.6",
+  "key": "B minor",
+  "measures": 18
+ },
+ {
+  "id": "bwv40.8",
+  "source": "bach",
+  "file": "bwv40.8",
+  "bwv": "40.8",
+  "title": "Freuet euch, ihr Christen alle",
+  "subtitle": "Rejoice, all you Christians",
+  "credit": "J. S. Bach · BWV 40.8",
+  "key": "F minor",
+  "measures": 20
+ },
+ {
+  "id": "bwv36.4-2",
+  "source": "bach",
+  "file": "bwv36.4-2",
+  "bwv": "36.4-2",
+  "title": "Wie schön leuchtet der Morgenstern",
+  "subtitle": "How brightly shines the morning star (Epiphany)",
+  "credit": "J. S. Bach · BWV 36.4-2",
+  "key": "D major",
+  "measures": 16
+ }
+]

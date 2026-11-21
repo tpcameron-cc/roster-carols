@@ -1,0 +1,413 @@
+"""Core arranging logic: ranges, key search, voices, rhythm, phrases, and concert-pitch correctness."""
+import pytest
+from music21 import converter, pitch
+
+from roster_carols import chorale as chmod
+from roster_carols.arrange import (ArrangeError, arrange, build_part, fit, grade_cfg, key_interval,
+                                    ranges_midi, search_keys, to_musicxml, voice_notes)
+from roster_carols.instruments import INSTRUMENTS, VOICES
+
+from conftest import LOPSIDED, SAMPLE_CHORALES
+
+
+def midi(name: str) -> int:
+    return int(pitch.Pitch(name).ps)
+
+
+# ---------------------------------------------------------------------------
+# Written-pitch range checks for transposing instruments
+# ---------------------------------------------------------------------------
+@pytest.mark.parametrize("inst,concert,written", [
+    ("Clarinet", "B-3", "C4"),        # Bb clarinet reads a major 2nd up
+    ("Trumpet", "B-3", "C4"),
+    ("Alto Sax", "E-4", "C5"),        # alto sax reads a major 6th up
+    ("Horn", "F3", "C4"),             # horn in F reads a perfect 5th up
+    ("Bari Sax", "E-2", "C4"),        # bari reads an octave + major 6th up
+    ("Tenor Sax", "B-2", "C4"),
+    ("Bass Clarinet", "B-2", "C4"),
+    ("Flute", "C5", "C5"),
+    ("Tuba", "B-1", "B-1"),
+])
+def test_written_offsets(inst, concert, written):
+    assert midi(concert) + INSTRUMENTS[inst].written_semitones == midi(written)
+
+
+@pytest.mark.parametrize("inst,concert_in,concert_out", [
+    # grade-1 written ranges: Clarinet G3-C5, Trumpet Bb3-C5, Alto Sax D4-C6, Horn G3-C5, Bari D4-C6
+    ("Clarinet", "B-4", "C5"),     # concert Bb4 = written C5 (top of range); concert C5 = written D5 (out)
+    ("Trumpet", "B-4", "C5"),
+    ("Alto Sax", "E-5", "F5"),     # concert Eb5 = written C6 (top); concert F5 = written D6 (out)
+    ("Horn", "F4", "G4"),          # concert F4 = written C5 (top); concert G4 = written D5 (out)
+    ("Bari Sax", "E-4", "F4"),     # concert Eb4 = written C6 (top); concert F4 = written D6 (out)
+])
+def test_range_check_is_in_written_pitch(inst, concert_in, concert_out):
+    lo, hi = ranges_midi(grade_cfg("1"))[inst]
+    base = INSTRUMENTS[inst].written_semitones
+    ok = [chmod_note(concert_in)]
+    bad = [chmod_note(concert_out)]
+    assert fit(ok, base, lo, hi).pre_out == 0
+    f = fit(bad, base, lo, hi)
+    assert f.octave == -1 and f.pre_out == 0   # fixed by moving the whole (one-note) part down
+
+
+def chmod_note(name: str, phrase: int = 0):
+    from roster_carols.arrange import NoteRef
+    return NoteRef(1, "1", midi(name), phrase, name)
+
+
+# ---------------------------------------------------------------------------
+# Key search
+# ---------------------------------------------------------------------------
+@pytest.mark.parametrize("cid", ["joy-to-the-world", "hark-the-herald", "silent-night"])
+@pytest.mark.parametrize("roster", [{"Trumpet": 4}, {"Alto Sax": 3}, {"Flute": 2, "Tuba": 1}, LOPSIDED])
+def test_key_search_minimises_out_of_range_notes(cid, roster):
+    cfg = grade_cfg("1")
+    ch, _ = chmod.simplify(chmod.load(cid), cfg["rhythm"])
+    results = search_keys(ch, roster, cfg)
+    best = results[0]
+    # fewest notes out of range (a part pushed below the bass counts as 5 such notes)
+    assert best.rank[0] == min(r.rank[0] for r in results)
+    assert best.inverted == 0 or all(r.inverted for r in results)
+    # every allowed key was considered
+    mode = ch.key.mode
+    assert len(results) == len(cfg["keys"][mode])
+
+
+def test_key_search_picks_the_key_with_fewest_out_of_range_notes_single_instrument():
+    # One trumpet section on the melody: the chosen key leaves the fewest notes outside Bb3-C5.
+    cfg = grade_cfg("1")
+    ch, _ = chmod.simplify(chmod.load("hark-the-herald"), cfg["rhythm"])
+    results = search_keys(ch, {"Trumpet": 4}, cfg)
+    sop = voice_notes(ch, "S")
+    lo, hi = ranges_midi(cfg)["Trumpet"]
+    raw = {}
+    for r in results:
+        base = r.semitones + INSTRUMENTS["Trumpet"].written_semitones
+        raw[r.name] = min(sum(1 for n in sop if not lo <= n.midi + base + 12 * o <= hi) for o in (-1, 0, 1))
+    assert raw[results[0].name] == min(raw.values())
+
+
+@pytest.mark.parametrize("grade", ["0.5", "1", "2", "3"])
+def test_chosen_key_is_allowed_for_grade(grade):
+    res = arrange("joy-to-the-world", LOPSIDED, grade, with_parts=False)
+    cfg = grade_cfg(grade)
+    tonic, mode = res["key"]["concert"].split()
+    tonic = tonic[0] + tonic[1:].replace("b", "-")
+    assert pitch.Pitch(tonic).name in [pitch.Pitch(t).name for t in cfg["keys"][mode]]
+
+
+def test_key_interval_moves_at_most_a_tritone():
+    for t in ["C", "D-", "D", "E-", "E", "F", "F#", "G", "A-", "A", "B-", "B"]:
+        assert -6 <= key_interval("F#", t).semitones <= 5
+
+
+# ---------------------------------------------------------------------------
+# Voices
+# ---------------------------------------------------------------------------
+@pytest.mark.parametrize("cid", SAMPLE_CHORALES[:6])
+@pytest.mark.parametrize("roster", [
+    LOPSIDED,
+    {"Flute": 3, "Clarinet": 3, "Alto Sax": 2, "Trumpet": 2},          # no bass instrument at all
+    {"Clarinet": 6, "Trombone": 2, "Horn": 1, "Bari Sax": 1},
+    {"Flute": 1, "Oboe": 1, "Bassoon": 1, "Euphonium": 1, "Tuba": 1},
+])
+def test_every_voice_covered(cid, roster):
+    res = arrange(cid, roster, "1", with_parts=False)
+    assert all(res["voices"][v] for v in ("Soprano", "Alto", "Tenor", "Bass"))
+
+
+def test_no_bass_instrument_warns():
+    res = arrange("joy-to-the-world", {"Flute": 3, "Clarinet": 3, "Alto Sax": 2, "Trumpet": 2}, "1", with_parts=False)
+    assert any("No low instrument" in w for w in res["warnings"])
+
+
+def test_bass_line_goes_to_low_instruments_when_present():
+    res = arrange("joy-to-the-world", LOPSIDED, "1", with_parts=False)
+    bass = res["voices"]["Bass"]
+    assert "Tuba" in bass and all(INSTRUMENTS[i].low for i in bass)
+
+
+FOUR_LINES = ("Soprano", "Alto", "Tenor", "Bass")
+
+
+@pytest.mark.parametrize("grade", ["1", "3"])
+def test_one_section_splits_to_cover_all_four_lines(grade):
+    res = arrange("joy-to-the-world", {"Clarinet": 7}, grade)
+    assert [res["voices"][v] for v in FOUR_LINES] == [["Clarinet 1"], ["Clarinet 2"], ["Clarinet 3"], ["Clarinet 4"]]
+    assert sum(a["players"] for a in res["assignment"]) == 7
+    assert [p["part_name"] for p in res["parts"]] == [f"Clarinet {n} in Bb" for n in range(1, 5)]
+    assert len({p["filename"] for p in res["parts"]}) == 4
+    assert any("split into 4 parts" in n for n in res["notes"])
+    assert not any("left out" in w for w in res["warnings"])
+
+
+@pytest.mark.parametrize("roster,expect_bass", [
+    ({"Flute": 4, "Trombone": 2}, "Trombone"),
+    ({"Flute": 3, "Tuba": 1}, "Tuba"),
+    ({"Violin": 5, "Cello": 2}, "Cello"),
+    ({"Clarinet": 4, "Bari Sax": 2}, "Bari Sax"),
+    ({"Trumpet": 3, "Horn": 1}, "Horn"),
+])
+@pytest.mark.parametrize("grade", ["1", "3"])
+def test_small_groups_cover_every_line_and_keep_the_bass_low(roster, expect_bass, grade):
+    res = arrange("joy-to-the-world", roster, grade, with_parts=False)
+    assert all(res["voices"][v] for v in FOUR_LINES), res["voices"]
+    assert all(p.startswith(expect_bass) for p in res["voices"]["Bass"]), res["voices"]
+    by_inst: dict[str, int] = {}
+    for a in res["assignment"]:
+        by_inst[a["instrument"]] = by_inst.get(a["instrument"], 0) + a["players"]
+    assert by_inst == roster
+
+
+@pytest.mark.parametrize("roster,lines", [({"Flute": 1}, 1), ({"Flute": 2}, 2), ({"Flute": 2, "Tuba": 1}, 3)])
+def test_fewer_than_four_players_cover_as_many_lines_as_possible(roster, lines):
+    res = arrange("joy-to-the-world", roster, "1", with_parts=False)
+    covered = [v for v in FOUR_LINES if res["voices"][v]]
+    assert len(covered) == lines and "Soprano" in covered
+    if lines >= 2:
+        assert "Bass" in covered
+    assert any("left out" in w for w in res["warnings"])
+
+
+def test_big_ensembles_are_not_split():
+    res = arrange("joy-to-the-world", LOPSIDED, "1", with_parts=False)
+    assert all(a["part"] == a["instrument"] for a in res["assignment"])
+    assert res["notes"] == []
+
+
+def test_upper_voices_never_sound_below_the_bass():
+    for cid in SAMPLE_CHORALES[:6]:
+        res = arrange(cid, LOPSIDED, "1", with_parts=False)
+        for a in res["assignment"]:
+            if a["voice"] in "SAT":
+                assert not (a["voice"] == "A" and a["part_octave"] <= -2), (cid, a["instrument"])
+                assert not (a["voice"] == "T" and a["part_octave"] <= -1), (cid, a["instrument"])
+
+
+def test_bad_inputs():
+    with pytest.raises(ArrangeError):
+        arrange("joy-to-the-world", {"Kazoo": 3}, "1")
+    with pytest.raises(ArrangeError):
+        arrange("joy-to-the-world", {}, "1")
+    with pytest.raises(ArrangeError):
+        arrange("nope", LOPSIDED, "1")
+    with pytest.raises(ArrangeError):
+        arrange("joy-to-the-world", LOPSIDED, "7")
+
+
+# ---------------------------------------------------------------------------
+# Rhythm simplification
+# ---------------------------------------------------------------------------
+def bar_lengths(ch):
+    return {v: [round(b.length, 6) for b in bars] for v, bars in ch.voices.items()}
+
+
+@pytest.mark.parametrize("cid", SAMPLE_CHORALES)
+def test_grade_half_leaves_no_eighths_and_keeps_bar_lengths(cid):
+    original = chmod.load(cid)
+    simple, report = chmod.simplify(original, grade_cfg("0.5")["rhythm"])
+    assert bar_lengths(simple) == bar_lengths(original)
+    for v, bars in simple.voices.items():
+        for b in bars:
+            for e in b.events:
+                start = b.padding + e.offset
+                if abs(start - round(start)) < 1e-6:   # every event starts on a beat...
+                    assert e.dur >= 1 - 1e-6 or b.length < 1, (cid, v, b.number, e.dur)   # ...and is a quarter or longer
+                else:
+                    pytest.fail(f"{cid} {v} m.{b.number}: off-beat event survived at {start}")
+                assert e.tie is None, "grade 1/2 removes ties"
+
+
+@pytest.mark.parametrize("cid", SAMPLE_CHORALES)
+def test_grade2_leaves_no_sixteenths_and_keeps_bar_lengths(cid):
+    original = chmod.load(cid)
+    simple, _ = chmod.simplify(original, grade_cfg("2")["rhythm"])
+    assert bar_lengths(simple) == bar_lengths(original)
+    for bars in simple.voices.values():
+        for b in bars:
+            for e in b.events:
+                assert e.dur >= 0.5 - 1e-6
+
+
+def test_grade3_is_as_written():
+    original = chmod.load("joy-to-the-world")
+    simple, report = chmod.simplify(original, grade_cfg("3")["rhythm"])
+    assert report == []
+    assert [(e.dur, e.pitch) for b in simple.voices["T"] for e in b.events] == \
+           [(e.dur, e.pitch) for b in original.voices["T"] for e in b.events]
+
+
+def test_grade3_brings_back_the_eighths_grade_half_removed():
+    g1 = arrange("joy-to-the-world", LOPSIDED, "0.5")
+    g3 = arrange("joy-to-the-world", LOPSIDED, "3")
+    assert len(g1["rhythm"]) > 0 and g3["rhythm"] == []
+    assert sum(len(a["phrase_shifts"]) for a in g3["assignment"]) <= sum(len(a["phrase_shifts"]) for a in g1["assignment"])
+    eighths = lambda res: sum(p["musicxml"].count("<type>eighth</type>") for p in res["parts"])
+    assert eighths(g1) == 0 and eighths(g3) > 0
+
+
+def test_built_grade_half_parts_have_no_eighth_notes():
+    res = arrange("joy-to-the-world", LOPSIDED, "0.5")
+    for p in res["parts"]:
+        part = converter.parseData(p["musicxml"], format="musicxml").parts[0]
+        for n in part.recurse().notes:
+            assert n.quarterLength >= 1, (p["instrument"], n.measureNumber, n.quarterLength)
+
+
+# ---------------------------------------------------------------------------
+# Phrases and octave shifts
+# ---------------------------------------------------------------------------
+@pytest.mark.parametrize("cid", SAMPLE_CHORALES[:8])
+def test_phrases_split_only_after_fermatas(cid):
+    ch = chmod.load(cid)
+    for v, bars in ch.voices.items():
+        evs = [e for b in bars for e in b.events]
+        for prev, cur in zip(evs, evs[1:]):
+            if cur.phrase != prev.phrase:
+                assert prev.fermata or prev.breath, f"{cid} {v}: phrase changes mid-phrase"
+                assert cur.phrase == prev.phrase + 1
+
+
+@pytest.mark.parametrize("grade", ["0.5", "1", "2"])
+@pytest.mark.parametrize("cid", SAMPLE_CHORALES[:8])
+def test_octave_shifts_change_only_at_fermata_boundaries(cid, grade):
+    cfg = grade_cfg(grade)
+    ch, _ = chmod.simplify(chmod.load(cid), cfg["rhythm"])
+    best = search_keys(ch, LOPSIDED, cfg)[0]
+    for inst, v in best.assign.items():
+        f = best.fits[inst]
+        evs = [e for b in ch.voices[v] for e in b.events]
+        for prev, cur in zip(evs, evs[1:]):
+            if f.shift_for(cur.phrase) != f.shift_for(prev.phrase):
+                assert (prev.fermata or prev.breath) and cur.phrase != prev.phrase, (cid, inst)
+        assert len(f.tacet) <= 0.5 * (max(e.phrase for e in evs) + 1) + 1e-9 or f.tacet == set()
+
+
+# ---------------------------------------------------------------------------
+# Musical correctness: every written part plays the right concert pitches
+# ---------------------------------------------------------------------------
+def expected_concert(ch, v, f, key_iv):
+    out, t = {}, 0.0
+    for b in ch.voices[v]:
+        for e in b.events:
+            if not e.is_rest and e.phrase not in f.tacet and e.tie not in ("stop", "continue"):
+                out[round(t + e.offset, 4)] = int(e.pitch.transpose(key_iv).ps) + 12 * f.shift_for(e.phrase)
+        t += b.length
+    return out
+
+
+ORCHESTRA = {"Flute": 2, "Oboe": 2, "Clarinet": 2, "Bassoon": 2, "Horn": 4, "Trumpet": 2, "Trombone": 3, "Tuba": 1,
+             "Bells": 1, "Xylophone": 1, "Marimba": 1, "Vibraphone": 1,
+             "Violin": 16, "Viola": 6, "Cello": 5, "Double Bass": 3}
+
+
+@pytest.mark.parametrize("roster", [LOPSIDED, ORCHESTRA, {"Clarinet": 7}, {"Flute": 4, "Trombone": 2}],
+                         ids=["band", "orchestra", "clarinets-divisi", "flutes-trombones-divisi"])
+@pytest.mark.parametrize("grade", ["1", "3"])
+@pytest.mark.parametrize("cid", SAMPLE_CHORALES[:6])
+def test_written_parts_transpose_back_to_the_assigned_voice(cid, grade, roster):
+    cfg = grade_cfg(grade)
+    ch, _ = chmod.simplify(chmod.load(cid), cfg["rhythm"])
+    best = search_keys(ch, roster, cfg)[0]
+    key_iv = key_interval(ch.key.tonic.name, best.tonic)
+    for name, v in best.assign.items():
+        inst = INSTRUMENTS[best.inst(name)]
+        xml = to_musicxml(build_part(ch, v, inst, best, best.fits[name], cfg["label"]))
+        part = converter.parseData(xml, format="musicxml").parts[0]
+        sounding = inst.written_interval.reverse() if inst.written_semitones else None   # written -> sounding
+        actual = {}
+        for n in part.flatten().notes:
+            if n.tie is not None and n.tie.type in ("stop", "continue"):
+                continue
+            p = n.pitch.transpose(sounding) if sounding is not None else n.pitch
+            actual[round(float(n.offset), 4)] = int(p.ps)
+        assert actual == expected_concert(ch, v, best.fits[name], key_iv), (cid, grade, name, v)
+
+
+@pytest.mark.parametrize("grade", ["0.5", "1", "2", "3"])
+def test_no_printed_note_out_of_range_for_sample_band(grade):
+    res = arrange("joy-to-the-world", LOPSIDED, grade)
+    rng = ranges_midi(grade_cfg(grade))
+    for p in res["parts"]:
+        lo, hi = rng[p["instrument"]]
+        part = converter.parseData(p["musicxml"], format="musicxml").parts[0]
+        for n in part.recurse().notes:
+            assert lo <= n.pitch.ps <= hi, (grade, p["instrument"], n.nameWithOctave)
+
+
+@pytest.mark.parametrize("roster", [{"Clarinet": 7}, {"Flute": 4, "Trombone": 2}, {"Violin": 5, "Cello": 2},
+                                    {"Trumpet": 4}, LOPSIDED])
+@pytest.mark.parametrize("grade", ["1", "3"])
+@pytest.mark.parametrize("cid", SAMPLE_CHORALES[:6])
+def test_lines_stay_in_order(cid, grade, roster):
+    """Nothing sounds above the melody line or below the bass line."""
+    from roster_carols.arrange import inversions, over_melody
+    from roster_carols.instruments import VOICES
+    cfg = grade_cfg(grade)
+    ch, _ = chmod.simplify(chmod.load(cid), cfg["rhythm"])
+    best = search_keys(ch, roster, cfg)[0]
+    means = {v: sum(n.midi for n in voice_notes(ch, v)) / len(voice_notes(ch, v)) for v in VOICES}
+    fp = {(p, v): best.fits[p] for p, v in best.assign.items()}
+    assert not over_melody(best.assign, fp, means)
+    assert not inversions(best.assign, fp, means)
+
+
+# ---------------------------------------------------------------------------
+# "Split sections" mode
+# ---------------------------------------------------------------------------
+@pytest.mark.parametrize("roster", [LOPSIDED, ORCHESTRA], ids=["band", "orchestra"])
+@pytest.mark.parametrize("grade", ["1", "3"])
+@pytest.mark.parametrize("cid", SAMPLE_CHORALES[:3])
+def test_split_sections_mode(cid, grade, roster):
+    res = arrange(cid, roster, grade, with_parts=False, parts_mode="multiple")
+    by_inst: dict[str, list[dict]] = {}
+    for a in res["assignment"]:
+        by_inst.setdefault(a["instrument"], []).append(a)
+    for inst, entries in by_inst.items():
+        assert sum(e["players"] for e in entries) == roster[inst]
+        info = INSTRUMENTS[inst]
+        expected = 1 if info.family == "mallets" else min(roster[inst], len(info.prefs), 3)
+        assert len(entries) == expected, (inst, [e["part"] for e in entries])
+        if len(entries) > 1:
+            lines = [e["voice"] for e in entries]
+            assert len(set(lines)) == len(lines), (inst, lines)            # different lines
+            assert all(v in info.prefs for v in lines), (inst, lines)      # lines that suit the instrument
+            assert [e["part"] for e in entries] == [f"{inst} {n}" for n in range(1, len(entries) + 1)]
+    assert all(res["voices"][v] for v in FOUR_LINES)
+    assert any("split into numbered parts" in n for n in res["notes"])
+
+
+def test_single_mode_keeps_one_part_per_instrument():
+    res = arrange("joy-to-the-world", ORCHESTRA, "1", with_parts=False, parts_mode="single")
+    assert all(a["part"] == a["instrument"] for a in res["assignment"])
+
+
+@pytest.mark.parametrize("cid", SAMPLE_CHORALES[:3])
+def test_split_parts_transpose_back_correctly(cid):
+    cfg = grade_cfg("3")
+    ch, _ = chmod.simplify(chmod.load(cid), cfg["rhythm"])
+    best = search_keys(ch, LOPSIDED, cfg, "multiple")[0]
+    key_iv = key_interval(ch.key.tonic.name, best.tonic)
+    for name, v in best.assign.items():
+        inst = INSTRUMENTS[best.inst(name)]
+        xml = to_musicxml(build_part(ch, v, inst, best, best.fits[name], cfg["label"]))
+        part = converter.parseData(xml, format="musicxml").parts[0]
+        sounding = inst.written_interval.reverse() if inst.written_semitones else None
+        actual = {}
+        for n in part.flatten().notes:
+            if n.tie is not None and n.tie.type in ("stop", "continue"):
+                continue
+            p = n.pitch.transpose(sounding) if sounding is not None else n.pitch
+            actual[round(float(n.offset), 4)] = int(p.ps)
+        assert actual == expected_concert(ch, v, best.fits[name], key_iv), (cid, name, v)
+
+
+def test_unknown_parts_mode_errors():
+    with pytest.raises(ArrangeError):
+        arrange("joy-to-the-world", LOPSIDED, "1", parts_mode="lots")
+
+
+def test_grade1_keeps_carol_eighths_but_drops_sixteenths():
+    simple, _ = chmod.simplify(chmod.load("joy-to-the-world"), grade_cfg("1")["rhythm"])
+    durs = {round(e.dur, 3) for bars in simple.voices.values() for b in bars for e in b.events}
+    assert 0.5 in durs and 0.25 not in durs
